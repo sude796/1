@@ -1,89 +1,53 @@
 import random
 
 
-# class Student:
-#     amount_of_students = 0
-#
-#     def __init__(self, height=160):
-#         self.height = height
-#         Student.amount_of_students += 1
-#
-#
-# roman = Student()
-# maria = Student(height=50)
-# maria1 = Student(height=10)
-# print(roman.height)
-# print(maria.height)
-# print(roman.amount_of_students,'Roman')
-# print(Student.amount_of_students,'Students')
-
-# class Student:
-#     def __init__(self):
-#         self.height += 10
-#     height = 160
-#     def printer(self):
-#         print(self.height)
-#
-#
-# roman = Student()
-# roman1 = Student()
-# roman2 = Student()
-#
-# roman.printer()
-
-
-class Student:
-    def __init__(self, name):
+class Pet:
+    def __init__(self, name, animal_type):
         self.name = name
-        self.gladness = 50
-        self.progress = 0
-        self.alive = True
+        self.animal_type = animal_type
+        self.hunger = random.randint(0, 10)  # від 0 до 10
+        self.happiness = random.randint(0, 10)  # від 0 до 10
 
-    def to_study(self):
-        print('Time to study')
-        self.progress += 0.12
-        self.gladness -= 5
+    def __str__(self):
+        return f"{self.name} ({self.animal_type}) [Hunger: {self.hunger}, Happiness: {self.happiness}]"
 
-    def to_sleep(self):
-        print('I will sleep')
-        self.gladness += 3
+    def play(self):
+        self.hunger += 1
+        self.happiness += 2
+        print(f"{self.name} is playing.")
 
-    def to_chill(self):
-        print('Rest time')
-        self.gladness += 5
-        self.progress -= 0.1
+    def feed(self):
+        self.hunger -= 2
+        if self.hunger < 0:
+            self.hunger = 0
+        self.happiness += 1
+        print(f"{self.name} is fed.")
 
-    def is_alive(self):
-        if self.progress < -0.5:
-            print('Cast out...')
-            self.alive = False
-        elif self.gladness <= 0:
-            print('Depression...')
-            self.alive = False
-        elif self.progress > 5:
-            print('Passed externally...')
+    def wait(self):
+        self.hunger += 1
+        self.happiness -= 1
+        print(f"{self.name} is waiting.")
 
-    def end_of_day(self):
-        print(f"Gladness = {self.gladness}")
-        print(f"Progress = {round(self.progress, 2)}")
+    def is_hungry(self):
+        return self.hunger > 5
 
-    def live(self, day):
-        day = "Day " + str(day) + " of " + self.name + " life."
-        print(f"{day:=^50}")
-        live_cube = random.randint(1, 3)
-        if live_cube == 1:
-            self.to_study()
-        elif live_cube == 2:
-            self.to_sleep()
-        elif live_cube == 3:
-            self.to_chill()
-        self.end_of_day()
-        self.is_alive()
+    def is_unhappy(self):
+        return self.happiness < 5
 
 
-vasya = Student(name='Vasya')
+class Cat(Pet):
+    def __init__(self, name):
+        super().__init__(name, "Cat")
 
-for day in range(365):
-    if vasya.alive == False:
-        break
-    vasya.live(day)
+    def meow(self):
+        print("Meow!")
+        self.happiness += 1
+
+
+class Dog(Pet):
+    def __init__(self, name):
+        super().__init__(name, "Dog")
+
+    def bark(self):
+        print("Woof!")
+        self.happiness += 1
