@@ -177,7 +177,7 @@ class Job:
         self.salary = job_list[self.job]['salary']
         self.gladness_less = job_list[self.job]['gladness_less']
 
-class sport:
+class Sport:
     def gym(self, manage):
         if self.car.drive():
             pass
@@ -198,3 +198,4 @@ class sport:
                 print('I do barbell')
                 self.gladness += 60
                 self.satiety -= 10
+
