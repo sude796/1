@@ -110,7 +110,7 @@ class Human:
         self.home.mess = 0
 
     def to_repair(self):
-        self.car.strangth += 100
+        self.car.strength += 100
         self.money -= 50
 
     def days_indexes(self, day):
@@ -128,10 +128,64 @@ class Human:
         car_indexes = f"{self.car.brand} car indexes"
         print(f"{car_indexes:^50}", "\n")
         print(f"fuel - {self.car.fuel}")
-        print(f"strangth - {self.car.strangth}")
+        print(f"strength - {self.car.strength}")
 
+        #      --------------Here-----------------
 
-#      --------------Here-----------------
+    def is_alive(self):
+        if self.gladness < 0:
+            print('Depression')
+            return False
+        if self.satiety < 0:
+            print('Dead...')
+            return False
+        if self.money < -500:
+            print('Bankrupt...')
+            return False
+
+    def live(self, day):
+        if self.is_alive() == False:
+            return False
+        if self.home is None:
+            print('Settled in the house')
+            self.get_home()
+        if self.car is None:
+            self.get_car()
+            print(f"I bought a car {self.car.brand}")
+        if self.job is None:
+            self.get_job()
+            print(f"I don`t have a job, going to get a job {self.job.job} with salary {self.job.salary}")
+        self.days_indexes(day)
+        dice = random.randint(1, 4)
+
+        if self.satiety < 20:
+            print('I`ll go eat')
+            self.eat()
+        elif self.gladness < 20:
+            if self.home.mess > 15:
+                print('I want to chill, but there is so mach mess... \n So I will clean the house')
+                self.clean_home()
+            else:
+                print('Let`s chill')
+                self.chill()
+        elif self.money < 0:
+            print('Start working')
+            self.work()
+        elif self.car.strength < 15:
+            print('I need to repair my car')
+            self.to_repair()
+        elif dice == 1:
+            print('Let`s chill')
+            self.chill()
+        elif dice == 2:
+            print('Start working')
+            self.work()
+        elif dice == 3:
+            print('Cleaning time')
+            self.clean_home()
+        elif dice == 4:
+            print('Time for treats!')
+            self.shopping(manage='delicacies')
 
 
 class Auto:
@@ -177,25 +231,9 @@ class Job:
         self.salary = job_list[self.job]['salary']
         self.gladness_less = job_list[self.job]['gladness_less']
 
-class Sport:
-    def gym(self, manage):
-        if self.car.drive():
-            pass
-        else:
-            if self.car.fuel < 20:
-                manage = 'fuel'
-            else:
-                self.to_repair()
-                return
-        if manage == 'season ticket':
-            print('I bought season ticket')
-            self.money -= 500
-            if manage == 'dumbbells':
-                print('I do dumbbells')
-                self.gladness += 60
-                self.satiety -= 10
-            elif manage == 'barbell':
-                print('I do barbell')
-                self.gladness += 60
-                self.satiety -= 10
 
+nick = Human(name='Nick')
+
+for day in range(1, 8):
+    if nick.live(day) == False:
+        break
