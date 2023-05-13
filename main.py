@@ -101,27 +101,6 @@ class Human:
             self.gladness += 10
             self.satiety += 2
 
-    def gym(self, manage):
-        if self.car.drive():
-            pass
-        else:
-            if self.car.fuel < 20:
-                manage = 'fuel'
-            else:
-                self.to_repair()
-                return
-        if manage == 'season ticket':
-            print('I bought season ticket')
-            self.money -= 500
-            if manage == 'dumbbells':
-                print('I do dumbbells')
-                self.gladness += 60
-                self.satiety -= 10
-            elif manage == 'barbell':
-                print('I do barbell')
-                self.gladness += 60
-                self.satiety -= 10
-
     def chill(self):
         self.gladness += 10
         self.home.mess += 5
@@ -197,3 +176,25 @@ class Job:
         self.job = random.choice(list(job_list))
         self.salary = job_list[self.job]['salary']
         self.gladness_less = job_list[self.job]['gladness_less']
+
+class sport:
+    def gym(self, manage):
+        if self.car.drive():
+            pass
+        else:
+            if self.car.fuel < 20:
+                manage = 'fuel'
+            else:
+                self.to_repair()
+                return
+        if manage == 'season ticket':
+            print('I bought season ticket')
+            self.money -= 500
+            if manage == 'dumbbells':
+                print('I do dumbbells')
+                self.gladness += 60
+                self.satiety -= 10
+            elif manage == 'barbell':
+                print('I do barbell')
+                self.gladness += 60
+                self.satiety -= 10
