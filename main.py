@@ -56,24 +56,41 @@
 # iphone.print_info()
 
 
-class Computer:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        super().__init__()
-        self.memory = 128
+# class Computer:
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         super().__init__()
+#         self.memory = 128
+#
+# class Display:
+#     def __init__(self):
+#         super().__init__()
+#         self.resolution = "4k"
+#
+# class SmartPhone(Computer,Display):
+#     def print_info(self):
+#         print(self.model)
+#         print(self.resolution)
+#         print(self.memory)
+#
+#
+# iphone = SmartPhone(model="Last")
+#
+# iphone.print_info()
 
-class Display:
-    def __init__(self):
-        super().__init__()
-        self.resolution = "4k"
+class MyIterable:
+    def __init__(self, data):
+        self.data = data
 
-class SmartPhone(Computer,Display):
-    def print_info(self):
-        print(self.model)
-        print(self.resolution)
-        print(self.memory)
+    def __iter__(self):
+        return self._generator()
+
+    def _generator(self):
+        for item in self.data:
+            yield item
 
 
-iphone = SmartPhone(model="Last")
+my_iterable = MyIterable([1, 2, 3, 4, 5])
 
-iphone.print_info()
+for item in my_iterable:
+    print(item)
