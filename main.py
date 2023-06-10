@@ -345,6 +345,6 @@ brands_of_car = {
 auction = Auction()
 
 human = Human()
-for day in range(1, 365):
+for day in range(1, 11):
     human.live(day)
     print('\n')
